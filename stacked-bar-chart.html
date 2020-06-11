@@ -1,0 +1,110 @@
+<html>
+
+<script src="https://d3js.org/d3.v4.js"></script>
+
+<div id="stackedBarChart">
+    <svg width="400px" height="400px"></svg>
+</div>
+
+<script>
+    var margin = {top: 10, bottom: 30, left: 30, right: 10};
+    var width = 400 - margin.left - margin.right;
+    var height = 400 - margin.top - margin.bottom;
+
+    var svg = d3.select("svg")
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var rowConverter = function (d) {
+        return {
+            age: d["age"],
+            male: parseInt(d["male"]),
+            female: parseInt(d["female"])
+        }
+    }
+    d3.csv("https://raw.githubusercontent.com/justhoaian/DSDV_AvidCOVIDDataSimplifier/master/DSDV_Project_StackedBarChart_080620.csv", rowConverter, function (error, data) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log(data);
+
+            var totalInDay = [];
+            for (var i = 0; i < data.length; i++) {
+                var sum = data[i].male + data[i].female;
+                totalInDay.push(sum);
+            }
+            console.log(totalInDay);
+
+            var keys = [];
+            for (var i = 0; i < data.length; i++) {
+                keys.push(data[i].age);
+            }
+            console.log(keys);
+
+            //Scales
+            var xScale = d3.scaleBand()
+                .rangeRound([0, width])
+                .paddingInner(0.05)
+                .align(0.1)
+                .domain(keys);
+
+            var yScale = d3.scaleLinear()
+                .rangeRound([height, 0])
+                .domain([0, d3.max(totalInDay)]);
+
+            //Axis
+            svg.append("g")
+                .attr("class", "axis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(xScale));
+
+            svg.append("g")
+                .attr("class", "axis")
+                .call(d3.axisLeft(yScale));
+
+            svg.selectAll("rectMale")
+                .data(data)
+                .enter().append("rect")
+                .attr("x", function (d) {
+                    return xScale(d.age);
+                })
+                .attr("y", function (d) {
+                    return yScale(d.male);
+                })
+                .attr("width", function () {
+                    return xScale.bandwidth();
+                })
+                .attr("height", function (d) {
+                    return height - yScale(d.male);
+                })
+                .attr("fill", function(d){
+                    return "rgb(0,191,255)";
+                });
+
+            svg.selectAll("rectFemale")
+                .data(data)
+                .enter().append("rect")
+                .attr("x", function (d) {
+                    return xScale(d.age);
+                })
+                .attr("y", function (d) {
+                    return yScale(d.female + d.male);
+                })
+                .attr("width", function () {
+                    return xScale.bandwidth();
+                })
+                .attr("height", function (d) {
+                    return height - yScale(d.female);
+                })
+                .attr("fill", function(d){
+                    return "rgb(255,105,180)";
+                })
+        }
+    })
+
+
+</script>
+</html>
