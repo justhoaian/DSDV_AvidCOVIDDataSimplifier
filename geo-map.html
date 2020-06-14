@@ -168,7 +168,7 @@
                             .style("top", (d3.event.pageY) + "px")
                             .style("left", (d3.event.pageX + 10) + "px")
 
-                        tooltip.html(d.properties.province.bold() + " <br>Cases: " + d.properties.cases.bold());
+                        tooltip.html(d.properties.province.bold() + " <br>Confirmed cases: " + d.properties.cases.bold());
                     })
                     .on("mouseout", function(d) {
                         d3.select(this)
