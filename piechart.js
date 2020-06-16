@@ -17,7 +17,7 @@ var svg = d3.select('#piechart')
     .attr("width", width + 150)
     .attr("height", height + 100)
     .style("border", "1px solid DodgerBlue")
-	.style("border-radius", "15px")
+    .style("border-radius", "15px")
     .append('g')
     .attr('transform', 'translate(' + (width / 1.42) + ',' + (height / 1.6) + ')');
 
@@ -90,8 +90,8 @@ path.on('mouseover', function(d) {
 });
 
 path.on('mousemove', function(d) {
-    tooltip3.style('top', (d3.event.pageY - 580) + 'px')
-        .style('left', (d3.event.pageX - 280) + 'px');
+    tooltip3.style('top', (d3.event.pageY - 650) + 'px')
+        .style('left', (d3.event.pageX - 270) + 'px');
 });
 
 path.on('mouseout', function() {
