@@ -49,7 +49,7 @@ d3.csv("https://raw.githubusercontent.com/justhoaian/DSDV_AvidCOVIDDataSimplifie
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .style("border", "1px solid DodgerBlue")
-			.style("border-radius", "15px")
+            .style("border-radius", "15px")
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -116,8 +116,8 @@ d3.csv("https://raw.githubusercontent.com/justhoaian/DSDV_AvidCOVIDDataSimplifie
                     .duration(200)
                     .style("opacity", .9);
                 div.html("Male" + "<br/>" + d.age + " year(s) old" + "<br/>" + d.male + " person(s)")
-                    .style("left", (d3.event.pageX - 795) + "px")
-                    .style("top", (d3.event.pageY - 570) + "px");
+                    .style("left", (d3.event.pageX - 770) + "px")
+                    .style("top", (d3.event.pageY - 660) + "px");
             })
             .on("mouseout", function() {
                 d3.select(this)
@@ -155,8 +155,8 @@ d3.csv("https://raw.githubusercontent.com/justhoaian/DSDV_AvidCOVIDDataSimplifie
                     .duration(200)
                     .style("opacity", .9);
                 div.html("Female" + "<br/>" + d.age + " year(s) old" + "<br/>" + d.female + " person(s)")
-                    .style("left", (d3.event.pageX - 795) + "px")
-                    .style("top", (d3.event.pageY - 570) + "px");
+                    .style("left", (d3.event.pageX - 770) + "px")
+                    .style("top", (d3.event.pageY - 660) + "px");
             })
             .on("mouseout", function(d) {
                 d3.select(this)
