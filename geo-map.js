@@ -33,13 +33,13 @@ var svg = d3.select("#geo-map")
     .attr("width", width)
     .attr("height", height)
     .style("border", "1px solid DodgerBlue")
-	.style("border-radius", "15px")
+    .style("border-radius", "15px")
     .call(zoom)
 var g = svg.append("g");
 
 //Define color scale
 var colorScale = d3.scaleQuantize()
-    .range(["rgb(255,218,185)", "rgb(244,164,96)", "rgb(210,105,30)", "rgb(139,69,19)"]);
+    .range(["rgb(255,218,185)", "rgb(244,164,96)", "rgb(210,105,30)", "rgb(185, 86, 15)"]);
 
 // Define the div for the tooltip
 var tooltip1 = d3.select("body").append("div")
@@ -123,7 +123,9 @@ d3.csv("https://raw.githubusercontent.com/nngockhanhh/dsdv/master/geomap.csv", f
             .attr("d", path)
             .style("fill", function(d) {
                 var value = d.properties.cases;
-                if (value > 0) {
+                if (value > 50) {
+                    return "rgb(137,68,19)"
+                } else if (value > 0) {
                     return colorScale(value);
                 } else {
                     return "#ccc";
